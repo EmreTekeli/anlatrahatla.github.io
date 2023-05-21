@@ -1,143 +1,178 @@
+/* Genel stil */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f2f2f2;
-  }
-  
-  .container {
-    text-align: center;
-  }
-  
-  .container h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .container p {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #555;
-  }
-  
-  .container textarea {
-    width: 300px;
-    height: 100px;
-    resize: none;
-    margin-bottom: 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-  
-  .container button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .container button:hover {
-    background-color: #45a049;
-  }
-  
-  #intro {
-    background-color: #f2f2f2;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  #message-input {
-    text-align: center;
-    margin: 20px 0;
-  }
-  
-  #message-text {
-    width: 300px;
-    height: 100px;
-    resize: none;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
-  #send-button {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  #send-button:hover {
-    background-color: #45a049;
-  }
-  
-  #message-board {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  #message-board h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  #message-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  #message-list li {
-    margin-bottom: 10px;
-    padding: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    text-align: center;
-  }
-  
-  #message-list li:hover {
-    transform: translateY(-5px);
-  }
-  
-  #message-list li.blur {
-    filter: blur(5px);
-    cursor: pointer;
-  }
-  
-  #message-list li.audio {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  #message-list li.audio::before {
-    content: "🔊";
-    font-size: 24px;
-    margin-right: 5px;
-    transition: color 0.3s ease;
-  }
-  
-  #message-list li.audio::before:hover {
-    color: #45a049;
-  }
-  
-  .message-datetime {
-    font-size: 12px;
-    color: #666;
-    margin-top: 5px;
-  }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Başlık stil */
+h1 {
+  font-size: 36px;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Giriş metni stil */
+#intro {
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#intro p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Mesaj giriş alanı stil */
+#message-input {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Mesaj metni alanı stil */
+#message-text {
+  width: 100%;
+  max-width: 500px;
+  height: 100px;
+  padding: 10px;
+  resize: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Butonlar stil */
+button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mesajlar bölümü stil */
+#message-board {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Mesajlar başlığı stil */
+#message-board h2 {
+  font-size: 24px;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Mesaj listesi stil */
+#message-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Mesaj öğesi stil */
+.message {
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Mesaj içeriği stil */
+.message-content {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Mesaj tarih/saat bilgisi stil */
+.message-datetime {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Ses kontrolü stil */
+.audio-container {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Ses başlığı stil */
+.audio-container h2 {
+  font-size: 24px;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Ses oynatıcı stil */
+.audio-player {
+  display: flex;
+  align-items: center;
+}
+
+.audio-player audio {
+  flex: 1;
+  width: 100%;
+  outline: none;
+}
+
+.audio-player .play-button {
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.audio-player .play-button:hover {
+  background-color: #555;
+}
+
+/* Tarih/saat alanı stil */
+#datetime {
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
