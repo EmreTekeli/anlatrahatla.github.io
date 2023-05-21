@@ -1,5 +1,6 @@
 // DOM elementlerini seçme
 const messageInput = document.getElementById('message-text');
+const messageTitleInput = document.getElementById('message-title');
 const sendTextButton = document.getElementById('send-text-button');
 const startRecordingButton = document.getElementById('start-recording-button');
 const stopRecordingButton = document.getElementById('stop-recording-button');
@@ -12,22 +13,11 @@ let chunks = [];
 // Metin ekle düğmesine tıklama olayı
 sendTextButton.addEventListener('click', () => {
   const messageText = messageInput.value;
+  const messageTitle = messageTitleInput.value;
 
-  // Girilen mesajı kontrol etme
-  if (messageText.trim() !== '') {
-    const newMessage = document.createElement('li');
-    newMessage.classList.add('message');
-    newMessage.textContent = messageText;
-
-    const messageDateTime = document.createElement('span');
-    messageDateTime.classList.add('message-datetime');
-    messageDateTime.textContent = getCurrentDateTime();
-    newMessage.appendChild(messageDateTime);
-
-    messageList.appendChild(newMessage);
-
-    // Mesaj girişini temizleme
-    messageInput.value = '';
+  // Başlık ve mesajı kontrol etme
+  if (messageTitle.trim() !== '' && messageText.trim() !== '') {
+    createMessage(messageTitle, messageText);
   }
 });
 
@@ -63,7 +53,6 @@ startRecordingButton.addEventListener('click', () => {
   }
 });
 
-
 // Kaydı durdur düğmesine tıklama olayı
 stopRecordingButton.addEventListener('click', () => {
   if (mediaRecorder && mediaRecorder.state === 'recording') {
@@ -74,43 +63,108 @@ stopRecordingButton.addEventListener('click', () => {
   }
 });
 
-
 // Ses ekle düğmesine tıklama olayı
 sendAudioButton.addEventListener('click', () => {
+  const messageTitle = messageTitleInput.value;
+  const audioDescription = prompt('Ses açıklamasını girin:'); // İsteğe bağlı ses açıklaması
+
   if (chunks.length > 0) {
     const audioBlob = new Blob(chunks, { type: 'audio/webm' });
     const audioUrl = URL.createObjectURL(audioBlob);
 
-    const newMessage = document.createElement('li');
-    newMessage.classList.add('message');
-
-    const audio = document.createElement('audio');
-    audio.src = audioUrl;
-    audio.controls = true;
-    newMessage.appendChild(audio);
-
-    const messageDateTime = document.createElement('span');
-    messageDateTime.classList.add('message-datetime');
-    messageDateTime.textContent = getCurrentDateTime();
-    newMessage.appendChild(messageDateTime);
-
-    messageList.appendChild(newMessage);
+    createMessage(messageTitle, '', audioUrl, audioDescription);
 
     chunks = [];
   }
 });
 
-// MediaRecorder kaydedilen veri olayı
-if (mediaRecorder) {
-  mediaRecorder.ondataavailable = (e) => {
-    chunks.push(e.data);
-  };
+// Yeni bir mesaj oluşturmak için yardımcı fonksiyon
+function createMessage(title, text, audioUrl = '', audioDescription = '') {
+  const newMessage = document.createElement('li');
+  newMessage.classList.add('message');
 
-  mediaRecorder.onstop = () => {
-    startRecordingButton.disabled = false;
-    stopRecordingButton.disabled = true;
-    sendAudioButton.disabled = false;
-  };
+  if (title) {
+    const messageHeader = document.createElement('h3');
+    messageHeader.textContent = title;
+    newMessage.appendChild(messageHeader);
+  }
+
+  if (text) {
+    const messageContent = document.createElement('p');
+    messageContent.textContent = text;
+    newMessage.appendChild(messageContent);
+  }
+
+  if (audioUrl) {
+    const audio = document.createElement('audio');
+    audio.src = audioUrl;
+    audio.controls = true;
+    newMessage.appendChild(audio);
+  }
+
+  if (audioDescription) {
+    const audioDescriptionParagraph = document.createElement('p');
+    audioDescriptionParagraph.textContent = audioDescription;
+    newMessage.appendChild(audioDescriptionParagraph);
+  }
+
+  const messageDateTime = document.createElement('span');
+  messageDateTime.classList.add('message-datetime');
+  messageDateTime.textContent = getCurrentDateTime();
+  newMessage.appendChild(messageDateTime);
+
+  const likeButton = document.createElement('button');
+  likeButton.textContent = 'Beğen';
+  likeButton.classList.add('like-button');
+  newMessage.appendChild(likeButton);
+
+  const dislikeButton = document.createElement('button');
+  dislikeButton.textContent = 'Beğenme';
+  dislikeButton.classList.add('dislike-button');
+  newMessage.appendChild(dislikeButton);
+
+  let likeCount = 0;
+  let dislikeCount = 0;
+
+  likeButton.addEventListener('click', () => {
+    if (!likeButton.disabled) {
+      if (likeButton.classList.contains('active')) {
+        likeCount--;
+        likeButton.classList.remove('active');
+      } else {
+        likeCount++;
+        likeButton.classList.add('active');
+        dislikeCount = 0;
+        dislikeButton.classList.remove('active');
+      }
+      
+      likeButton.textContent = 'Beğen' + (likeCount > 0 ? ' (' + likeCount + ')' : '');
+      dislikeButton.textContent = 'Beğenme' + (dislikeCount > 0 ? ' (' + dislikeCount + ')' : '');
+    }
+  });
+
+  dislikeButton.addEventListener('click', () => {
+    if (!dislikeButton.disabled) {
+      if (dislikeButton.classList.contains('active')) {
+        dislikeCount--;
+        dislikeButton.classList.remove('active');
+      } else {
+        dislikeCount++;
+        dislikeButton.classList.add('active');
+        likeCount = 0;
+        likeButton.classList.remove('active');
+      }
+      
+      dislikeButton.textContent = 'Beğenme' + (dislikeCount > 0 ? ' (' + dislikeCount + ')' : '');
+      likeButton.textContent = 'Beğen' + (likeCount > 0 ? ' (' + likeCount + ')' : '');
+    }
+  });
+
+  messageList.appendChild(newMessage);
+
+  // Başlık ve mesaj girişlerini temizleme
+  messageTitleInput.value = '';
+  messageInput.value = '';
 }
 
 // Geçerli tarih ve saati döndüren yardımcı fonksiyon
