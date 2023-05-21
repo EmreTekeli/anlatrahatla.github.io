@@ -12,7 +12,7 @@ sendTextButton.addEventListener('click', () => {
   // Girilen mesajı kontrol etme
   if (messageText.trim() !== '') {
     const newMessage = document.createElement('li');
-    newMessage.textContent = messageText;
+    newMessage.textContent = `${messageText} - ${getCurrentDateTime()}`;
     messageList.appendChild(newMessage);
 
     // Mesaj girişini temizleme
@@ -39,9 +39,18 @@ audioFileInput.addEventListener('change', () => {
       audio.src = audioDataUrl;
       audio.controls = true;
       newMessage.appendChild(audio);
+      newMessage.innerHTML += ` - ${getCurrentDateTime()}`;
       messageList.appendChild(newMessage);
     };
 
     reader.readAsDataURL(file);
   }
 });
+
+// Geçerli tarih ve saati döndüren yardımcı fonksiyon
+function getCurrentDateTime() {
+  const now = new Date();
+  const date = now.toLocaleDateString();
+  const time = now.toLocaleTimeString();
+  return `${date} ${time}`;
+}
