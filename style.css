@@ -94,7 +94,6 @@ body {
   color: #666;
 }
 
-
 #start-recording-button {
   background-color: #4CAF50;
 }
@@ -115,7 +114,6 @@ body {
   background-color: #333;
 }
 
-
 .like-button, .dislike-button {
   padding: 5px 10px;
   margin-right: 5px;
@@ -130,3 +128,24 @@ body {
   background-color: #999;
   cursor: not-allowed;
 }
+
+/* Yeni stil düzenlemeleri */
+
+.like-button.active {
+  background-color: #1abc9c;
+}
+
+.dislike-button.active {
+  background-color: #e74c3c;
+}
+
+.like-button:focus,
+.dislike-button:focus {
+  outline: none;
+}
+
+.message-list li:hover {
+  background-color: #eaf7f7;
+  transition: background-color 0.3s ease;
+}
+
