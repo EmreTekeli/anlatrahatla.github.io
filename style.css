@@ -9,7 +9,7 @@ body {
     height: 100vh;
     background-color: #f2f2f2;
   }
- 
+  
   .container {
     text-align: center;
   }
@@ -39,7 +39,6 @@ body {
     font-size: 16px;
     cursor: pointer;
   }
-  
   
   #intro {
     background-color: #f2f2f2;
@@ -94,4 +93,20 @@ body {
     cursor: pointer; /* Cursor'ı işaretçi şekline dönüştür */
   }
   
+  #message-list li.audio {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #message-list li.audio::before {
+    content: "🔊";
+    font-size: 24px;
+    margin-right: 5px;
+  }
+  
+  #message-list li.audio::before:hover {
+    color: #45a049;
+  }
   
