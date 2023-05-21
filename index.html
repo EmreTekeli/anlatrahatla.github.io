@@ -4,55 +4,55 @@
 <title>Anlat Rahatla</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 <style>
-
 #kedi {
-position: absolute;
-z-index: 999;
-width: 30px;
-height: 35px;
-pointer-events: none;
+  position: absolute;
+  z-index: 999;
+  width: 30px;
+  height: 35px;
+  pointer-events: none;
 }
 </style>
 </head>
 <body>
-    <div id="intro">
-        <h1>Anlat Rahatla</h1>
-        <p>Burada düşüncelerinizi paylaşabilirsiniz.</p>
-        </div>
-        <div id="message-input">
-        <input type="text" id="message-title" placeholder="Başlık girin...">
-        <textarea id="message-text" placeholder="Bir mesaj yazın..."></textarea>
-        <button id="send-text-button">Metin Ekle</button>
-        <button id="start-recording-button">Kaydı Başlat</button>
-        <button id="stop-recording-button">Kaydı Durdur</button>
-        <button id="send-audio-button">Ses Ekle</button>
-        </div>
-<div id="message-board">
-<h2>Mesajlar</h2>
-<ul id="message-list"></ul>
-</div>
-<div id="datetime"></div>
-<!-- kedi resmini buraya taşıyorum -->
-<img src="goma-cat.gif" alt="Kedi" id="kedi">
-<!-- jQuery kütüphanesini ekliyorum -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- imleci takip eden kedi resmi için JavaScript kodunu ekliyorum -->
+  <div id="intro">
+    <h1>Anlat Rahatla</h1>
+    <p>Burada düşüncelerinizi paylaşabilirsiniz.</p>
+  </div>
+  <div id="message-input">
+    <input type="text" id="message-title" placeholder="Başlık girin...">
+    <textarea id="message-text" placeholder="Bir mesaj yazın..."></textarea>
+    <button id="send-text-button" onclick="playSound('miyavlama.mp3')">Metin Ekle</button>
+    <button id="start-recording-button" onclick="playSound('miyavlama.mp3')">Kaydı Başlat</button>
+    <button id="stop-recording-button" onclick="playSound('miyavlama.mp3')">Kaydı Durdur</button>
+    <button id="send-audio-button" onclick="playSound('miyavlama.mp3')">Ses Ekle</button>
+  </div>
+  <div id="message-board">
+    <h2>Mesajlar</h2>
+    <ul id="message-list"></ul>
+  </div>
+  <div id="datetime"></div>
+  <img src="goma-cat.gif" alt="Kedi" id="kedi">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    var cursorOffset = { left: -30, top: -20 };
+    var audioElement = new Audio();
 
+    $(document).mousemove(function(e) {
+      var kedi = $("#kedi");
+      kedi.css({ left: e.pageX - cursorOffset.left, top: e.pageY - cursorOffset.top });
+    });
 
+    function playSound(soundFile) {
+      audioElement.src = soundFile;
+      audioElement.play();
 
-
-<script>
-// İmlecin konumunu ayarlamak için bir değişken tanımlıyoruz
-var cursorOffset = { left: -30, top: -20 };
-// Doküman üzerinde imleç hareket ettiğinde bir fonksiyon çalıştırıyoruz
-$(document).mousemove(function(e) {
-  // Kedi resmini seçiyoruz
-  var kedi = $("#kedi");
-  // Kedi resminin sol ve üst konumunu imlecin konumuna göre ayarlıyoruz
-  kedi.css({ left: e.pageX - cursorOffset.left, top: e.pageY - cursorOffset.top });
-});
-</script>
-<script src="script.js"></script>
-
+      // Düğme tıklamasının tamamlanmasını bekleyip sesi durdurma işlemi
+      setTimeout(function() {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+      }, 1000); // 1 saniye sonra sesi durdur
+    }
+  </script>
+  <script src="script.js"></script>
 </body>
 </html>
