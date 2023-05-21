@@ -7,56 +7,54 @@ const messageList = document.getElementById('message-list');
 
 // Metin ekle düğmesine tıklama olayı
 sendTextButton.addEventListener('click', () => {
-  const messageText = messageInput.value;
-
-  // Girilen mesajı kontrol etme
-  if (messageText.trim() !== '') {
-    const newMessage = document.createElement('li');
-    newMessage.textContent = messageText;
-
-    const messageDateTime = document.createElement('span');
-    messageDateTime.classList.add('message-datetime');
-    messageDateTime.textContent = getCurrentDateTime();
-    newMessage.appendChild(messageDateTime);
-
-    messageList.appendChild(newMessage);
-
-    // Mesaj girişini temizleme
-    messageInput.value = '';
-  }
-});
-
-// Ses ekle düğmesine tıklama olayı
-sendAudioButton.addEventListener('click', () => {
-  audioFileInput.click();
-});
-
-// Dosya seçildiğinde
-audioFileInput.addEventListener('change', () => {
-  const file = audioFileInput.files[0];
-  if (file) {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      const audioDataUrl = reader.result;
-
+    const messageText = messageInput.value;
+  
+    // Girilen mesajı kontrol etme
+    if (messageText.trim() !== '') {
       const newMessage = document.createElement('li');
-      const audio = document.createElement('audio');
-      audio.src = audioDataUrl;
-      audio.controls = true;
-      newMessage.appendChild(audio);
-
+      newMessage.classList.add('message');
+      newMessage.textContent = messageText;
+  
       const messageDateTime = document.createElement('span');
       messageDateTime.classList.add('message-datetime');
       messageDateTime.textContent = getCurrentDateTime();
       newMessage.appendChild(messageDateTime);
-
+  
       messageList.appendChild(newMessage);
-    };
-
-    reader.readAsDataURL(file);
-  }
-});
+  
+      // Mesaj girişini temizleme
+      messageInput.value = '';
+    }
+  });
+  
+  // Dosya seçildiğinde
+  audioFileInput.addEventListener('change', () => {
+    const file = audioFileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = () => {
+        const audioDataUrl = reader.result;
+  
+        const newMessage = document.createElement('li');
+        newMessage.classList.add('message');
+        const audio = document.createElement('audio');
+        audio.src = audioDataUrl;
+        audio.controls = true;
+        newMessage.appendChild(audio);
+  
+        const messageDateTime = document.createElement('span');
+        messageDateTime.classList.add('message-datetime');
+        messageDateTime.textContent = getCurrentDateTime();
+        newMessage.appendChild(messageDateTime);
+  
+        messageList.appendChild(newMessage);
+      };
+  
+      reader.readAsDataURL(file);
+    }
+  });
+  
 
 // Geçerli tarih ve saati döndüren yardımcı fonksiyon
 function getCurrentDateTime() {
