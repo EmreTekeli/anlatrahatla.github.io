@@ -12,7 +12,13 @@ sendTextButton.addEventListener('click', () => {
   // Girilen mesajı kontrol etme
   if (messageText.trim() !== '') {
     const newMessage = document.createElement('li');
-    newMessage.textContent = `${messageText} - ${getCurrentDateTime()}`;
+    newMessage.textContent = messageText;
+
+    const messageDateTime = document.createElement('span');
+    messageDateTime.classList.add('message-datetime');
+    messageDateTime.textContent = getCurrentDateTime();
+    newMessage.appendChild(messageDateTime);
+
     messageList.appendChild(newMessage);
 
     // Mesaj girişini temizleme
@@ -39,7 +45,12 @@ audioFileInput.addEventListener('change', () => {
       audio.src = audioDataUrl;
       audio.controls = true;
       newMessage.appendChild(audio);
-      newMessage.innerHTML += ` - ${getCurrentDateTime()}`;
+
+      const messageDateTime = document.createElement('span');
+      messageDateTime.classList.add('message-datetime');
+      messageDateTime.textContent = getCurrentDateTime();
+      newMessage.appendChild(messageDateTime);
+
       messageList.appendChild(newMessage);
     };
 
@@ -50,7 +61,7 @@ audioFileInput.addEventListener('change', () => {
 // Geçerli tarih ve saati döndüren yardımcı fonksiyon
 function getCurrentDateTime() {
   const now = new Date();
-  const date = now.toLocaleDateString();
-  const time = now.toLocaleTimeString();
-  return `${date} ${time}`;
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+  const dateTimeString = now.toLocaleDateString('tr-TR', options);
+  return dateTimeString;
 }
