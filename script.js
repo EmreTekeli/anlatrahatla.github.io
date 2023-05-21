@@ -1,11 +1,10 @@
 // DOM elementlerini seçme
 const messageInput = document.getElementById('message-text');
-const sendTextButton = document.getElementById('send-text-button');
+const sendTextButton = document.getElementById('send-button');
 const sendAudioButton = document.getElementById('send-audio-button');
 const recordButton = document.getElementById('record-button');
 const stopButton = document.getElementById('stop-button');
 const messageList = document.getElementById('message-list');
-
 // Ses kaydetme işlemi için değişkenler
 let mediaRecorder;
 let chunks = [];
@@ -60,27 +59,27 @@ mediaRecorder.addEventListener('stop', () => {
 
 // Yazı gönder düğmesine tıklama olayı
 sendTextButton.addEventListener('click', () => {
-  const messageText = messageInput.value;
-
-  // Girilen mesajı kontrol etme
-  if (messageText.trim() !== '') {
-    // Yeni mesaj nesnesini oluşturma
-    const newMessage = {
-      type: 'text',
-      content: messageText,
-      timestamp: new Date().toLocaleString(),
-    };
-
-    // Mesajı mesajlar dizisine ekleme
-    messages.push(newMessage);
-
-    // Mesaj listesini güncelleme
-    updateMessageList();
-
-    // Mesaj girişini temizleme
-    messageInput.value = '';
-  }
-});
+    const messageText = messageInput.value;
+  
+    // Girilen mesajı kontrol etme
+    if (messageText.trim() !== '') {
+      // Yeni mesaj nesnesini oluşturma
+      const newMessage = {
+        type: 'text',
+        content: messageText,
+        timestamp: new Date().toLocaleString(),
+      };
+  
+      // Mesajı mesajlar dizisine ekleme
+      messages.push(newMessage);
+  
+      // Mesaj listesini güncelleme
+      updateMessageList();
+  
+      // Mesaj girişini temizleme
+      messageInput.value = '';
+    }
+  });
 
 // Ses gönder düğmesine tıklama olayı
 sendAudioButton.addEventListener('click', () => {
