@@ -1,178 +1,132 @@
-/* Genel stil */
 body {
   font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Başlık stil */
-h1 {
-  font-size: 36px;
-  color: #333;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-/* Giriş metni stil */
 #intro {
-  background-color: #f2f2f2;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 50px;
+}
+
+#intro h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
 }
 
 #intro p {
   font-size: 18px;
-  color: #666;
-  margin-bottom: 10px;
 }
 
-/* Mesaj giriş alanı stil */
 #message-input {
-  margin-bottom: 20px;
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 20px;
   text-align: center;
 }
 
-/* Mesaj metni alanı stil */
-#message-text {
+#message-input input[type="text"],
+#message-input textarea {
   width: 100%;
-  max-width: 500px;
-  height: 100px;
   padding: 10px;
-  resize: none;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  color: #333;
+  border-radius: 4px;
 }
 
-/* Butonlar stil */
-button {
+#message-input button {
   padding: 10px 20px;
   margin-right: 10px;
   background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
 }
 
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Mesajlar bölümü stil */
 #message-board {
   background-color: #fff;
   padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
-/* Mesajlar başlığı stil */
 #message-board h2 {
   font-size: 24px;
-  color: #333;
-  margin-top: 0;
   margin-bottom: 10px;
 }
 
-/* Mesaj listesi stil */
 #message-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
-  margin: 0;
 }
 
-/* Mesaj öğesi stil */
-.message {
-  margin-bottom: 20px;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* Mesaj içeriği stil */
-.message-content {
-  font-size: 16px;
-  color: #333;
+#message-list li {
   margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-/* Mesaj tarih/saat bilgisi stil */
-.message-datetime {
+#message-list li.audio {
+  position: relative;
+}
+
+#message-list li.audio audio {
+  margin-top: 10px;
+}
+
+#message-list li.audio .audio-duration {
+  position: absolute;
+  bottom: -20px;
+  right: 0;
   font-size: 12px;
   color: #666;
 }
 
-/* Ses kontrolü stil */
-.audio-container {
-  background-color: #fff;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+#datetime {
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+  color: #666;
 }
 
-/* Ses başlığı stil */
-.audio-container h2 {
-  font-size: 24px;
-  color: #333;
-  margin-top: 0;
-  margin-bottom: 10px;
+
+#start-recording-button {
+  background-color: #4CAF50;
 }
 
-/* Ses oynatıcı stil */
-.audio-player {
-  display: flex;
-  align-items: center;
+#start-recording-button:disabled {
+  background-color: #ccc;
 }
 
-.audio-player audio {
-  flex: 1;
-  width: 100%;
-  outline: none;
+#stop-recording-button {
+  background-color: #f44336;
 }
 
-.audio-player .play-button {
-  width: 40px;
-  height: 40px;
+#stop-recording-button:disabled {
+  background-color: #ccc;
+}
+
+#send-audio-button {
+  background-color: #333;
+}
+
+
+.like-button, .dislike-button {
+  padding: 5px 10px;
+  margin-right: 5px;
   background-color: #333;
   color: #fff;
   border: none;
-  border-radius: 50%;
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.audio-player .play-button:hover {
-  background-color: #555;
-}
-
-/* Tarih/saat alanı stil */
-#datetime {
-  font-size: 14px;
-  color: #666;
-  text-align: right;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.like-button[disabled], .dislike-button[disabled] {
+  background-color: #999;
+  cursor: not-allowed;
 }
