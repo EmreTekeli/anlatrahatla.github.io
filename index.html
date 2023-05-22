@@ -4,14 +4,26 @@
   <title>Anlat Rahatla</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <style>
-    #kedi {
-      position: absolute;
-      z-index: 999;
-      width: 40px;
-      height: 45px;
-      pointer-events: none;
-      transition: all 0.4s ease-in-out;
-    }
+#kedi {
+  position: absolute;
+  z-index: 999;
+  width: 40px;
+  height: 45px;
+  pointer-events: none;
+  animation: moveKedi 0.6s infinite;
+}
+@keyframes moveKedi {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(10px, 10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
 
     .reverse {
       transform: scaleX(-1);
