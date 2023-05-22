@@ -7,10 +7,30 @@
     #kedi {
       position: absolute;
       z-index: 999;
-      width: 50px;
-      height: 60px;
+      width: 40px;
+      height: 45px;
       pointer-events: none;
       transition: all 0.4s ease-in-out;
+    }
+
+    .reverse {
+      transform: scaleX(-1);
+    }
+
+    #message-text {
+      transition: opacity 1s ease-in-out;
+    }
+
+    #message-title {
+      transition: opacity 1s ease-in-out;
+    }
+
+    .hidden {
+      opacity: 0;
+    }
+
+    body {
+      cursor: url('cat-cursor.png'), auto;
     }
   </style>
 </head>
@@ -26,6 +46,7 @@
     <button id="start-recording-button" onclick="playSound('miyavlama.mp3')">Kaydı Başlat</button>
     <button id="stop-recording-button" onclick="playSound('miyavlama.mp3')">Kaydı Durdur</button>
     <button id="send-audio-button" onclick="playSound('miyavlama.mp3')">Ses Ekle</button>
+    <button id="burn-button" onclick="burnMessage()">Yak</button>
   </div>
   <div id="message-board">
     <h2>Mesajlar</h2>
@@ -37,9 +58,23 @@
   <script>
     var cursorOffset = { left: -25, top: -30 };
     var audioElement = new Audio();
+    var isMouseMovingLeft = false;
 
     $(document).mousemove(function(e) {
       var kedi = $("#kedi");
+
+      if (e.pageX < cursorOffset.left) {
+        if (!isMouseMovingLeft) {
+          kedi.addClass("reverse");
+          isMouseMovingLeft = true;
+        }
+      } else {
+        if (isMouseMovingLeft) {
+          kedi.removeClass("reverse");
+          isMouseMovingLeft = false;
+        }
+      }
+
       kedi.css({ left: e.pageX - cursorOffset.left, top: e.pageY - cursorOffset.top });
     });
 
@@ -52,6 +87,37 @@
         audioElement.pause();
         audioElement.currentTime = 0;
       }, 1000); // 1 saniye sonra sesi durdur
+    }
+
+    function burnMessage() {
+      var messageTitle = $("#message-title");
+      var messageText = $("#message-text");
+
+      messageTitle.addClass("hidden");
+      messageText.addClass("hidden");
+
+      // Başlığı ve yazıyı yavaşça silme işlemi
+      setTimeout(function() {
+        messageTitle.val("");
+        messageTitle.removeClass("hidden");
+
+        messageText.val("");
+        messageText.removeClass("hidden");
+      }, 1000); // 1 saniye sonra başlığı ve yazıyı tekrar gösterme
+
+      var kedi = $("#kedi");
+      var originalSrc = kedi.attr("src");
+      var gifSrc = "jun-cat.gif";
+
+      // Gif'i değiştirme işlemi
+      kedi.attr("src", gifSrc);
+
+      // Gif'i 1 saniye sonra eski haline getirme işlemi
+      setTimeout(function() {
+        kedi.attr("src", originalSrc);
+      }, 1000);
+      
+      playSound('miyavlama.mp3');
     }
   </script>
   <script src="script.js"></script>
