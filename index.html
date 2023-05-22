@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Anlat Rahatla</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-<style>
-#kedi {
-  position: absolute;
-  z-index: 999;
-  width: 30px;
-  height: 35px;
-  pointer-events: none;
-}
-</style>
+  <title>Anlat Rahatla</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    #kedi {
+      position: absolute;
+      z-index: 999;
+      width: 50px;
+      height: 60px;
+      pointer-events: none;
+      transition: all 0.4s ease-in-out;
+    }
+  </style>
 </head>
 <body>
   <div id="intro">
@@ -34,7 +35,7 @@
   <img src="goma-cat.gif" alt="Kedi" id="kedi">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
-    var cursorOffset = { left: -30, top: -20 };
+    var cursorOffset = { left: -25, top: -30 };
     var audioElement = new Audio();
 
     $(document).mousemove(function(e) {
